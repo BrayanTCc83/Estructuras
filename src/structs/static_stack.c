@@ -18,6 +18,8 @@ StaticStack *new_static_stack(size_t capacity) {
 
     stack->capacity = capacity;
     stack->size = 0;
+
+    return stack;
 }
 
 bool static_stack_push(StaticStack *stack, int value) {
