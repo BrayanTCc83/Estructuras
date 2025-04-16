@@ -18,6 +18,8 @@ StaticQueue *new_static_queue(size_t capacity) {
 
     queue->capacity = capacity;
     queue->size = 0;
+
+    return queue;
 }
 
 // O(1)
