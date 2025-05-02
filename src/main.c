@@ -6,28 +6,32 @@
 #include "headers/static_sorted_list.h"
 #include "headers/static_circular_queue.h"
 #include "headers/static_circular_list.h"
+#include "headers/bit_set.h"
 
 int main() {
-    StaticCircularList *list = new_static_circular_list(10, ASCENDING);
-    printf("Sorted List: %d\n", sizeof(StaticSortedList));
-    printf("Circular List: %d\n", sizeof(StaticCircularList));
+    BitSet *set = new_bit_set(-31, 32);
+    BitSet *set2 = new_bit_set(-31, 32);
+
+    bit_set_insert(set, 31);
+    bit_set_insert(set, -12);
+    bit_set_insert(set, 14);
+    bit_set_insert(set, -14);
+    bit_set_insert(set, -12);
+    bit_set_remove(set, 31);
     
-    for(int i = 1; i < 11; i++) {
-        static_circular_list_insert(list, i);
-    }
+    bit_set_insert(set2, 1);
+    bit_set_insert(set2, 9);
+    bit_set_insert(set2, -7);
+    bit_set_insert(set2, -14);
 
-    for(int i = 0; i < 5; i++) {
-        int res = static_circular_list_remove(list, 10 - i);
-        printf("List: %d\n", res);
-    }
-    
-    for(int i = 11; i < 16; i++) {
-        static_circular_list_insert(list, i);
-    }
+    BitSet *complement = bit_set_complement(set);
+    BitSet *unionset = bit_set_union(*set, *set2);
+    BitSet *difference = bit_set_difference(*set, *set2);
+    BitSet *difference2 = bit_set_difference(*set2, *set);
+    BitSet *simetric = bit_set_simetric_difference(*set2, *set);
+    BitSet *intersection = bit_set_intersection(*set2, *set);
 
-    printf("Lista[%d] = %d\n", 3, static_circular_list_get(*list, 3));
-
-    delete_static_circular_list(list);
-    list = NULL;
+    delete_bit_set(set);
+    set = NULL;
     return EXIT_SUCCESS;
 }
