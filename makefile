@@ -3,16 +3,21 @@
 SOURCE=src
 HEADERS=$(SOURCE)/headers
 MAIN=$(SOURCE)/main.c
-STRUCTS=$(SOURCE)/structs/*.c
+STRUCTS=$(SOURCE)/structs
+STATIC=$(STRUCTS)/static
+STATIC_QUEUE=$(STATIC)/queue/*.c
+STATIC_STACK=$(STATIC)/stack/*.c
+STATIC_LIST=$(STATIC)/list/*.c
+STATIC_SET=$(STATIC)/set/*.c
 
 DISTRIBUTION=dist
 OUTPUT=$(DISTRIBUTION)/Estructuras
 
 CC:=gcc
 
-run: $(MAIN) $(STRUCTS) $(HEADERS)/*.h | $(DISTRIBUTION)
+run: $(MAIN) $(STATIC_QUEUE) $(STATIC_STACK) $(STATIC_LIST) $(STATIC_SET) $(HEADERS)/*.h | $(DISTRIBUTION)
 	@echo Compile program.
-	$(CC) -o $(OUTPUT) $(MAIN) $(STRUCTS) -I $(HEADERS) -DDEV
+	$(CC) -o $(OUTPUT) $(MAIN) $(STATIC_QUEUE) $(STATIC_STACK) $(STATIC_LIST) $(STATIC_SET) -I $(HEADERS) -DDEV
 
 $(DISTRIBUTION):
 	@echo Making directory $(DISTRIBUTION).
