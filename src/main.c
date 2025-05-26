@@ -12,19 +12,20 @@
 #include "headers/simple_node.h"
 // DYNAMIC STRUCTURES
 #include "headers/stack.h"
+#include "headers/queue.h"
 
 int main() {
-    Stack *stack = new_stack();
+    Queue *queue = new_queue();
 
     for(int i = 1; i <= 10; i++) {
-        stack_push(stack, i * 10);
+        queue_enqueue(queue, i * 10);
     }
 
-    while(!stack_is_void(*stack)) {
-        printf("Popped: %d\n", stack_pop(stack));
+    while(!queue_is_void(*queue)) {
+        printf("Dequeue: %d\n", queue_dequeue(queue));
     }
 
-    delete_stack(stack);
+    delete_queue(queue);
 
     return EXIT_SUCCESS;
 }
