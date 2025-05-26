@@ -11,32 +11,20 @@
 // DYNAMIC COMPONENTS
 #include "headers/simple_node.h"
 // DYNAMIC STRUCTURES
+#include "headers/stack.h"
 
 int main() {
-    SimpleNode *node1 = new_simple_node(10, NULL);
-    SimpleNode *node2 = new_simple_node(20, NULL);
-    SimpleNode *node3 = new_simple_node(30, NULL);
+    Stack *stack = new_stack();
 
-    simple_node_print(node1);
-    simple_node_print(node2);
-    simple_node_print(node3);
+    for(int i = 1; i <= 10; i++) {
+        stack_push(stack, i * 10);
+    }
 
-    simple_node_set_next(node1, node2);
-    simple_node_set_next(node2, node3);
+    while(!stack_is_void(*stack)) {
+        printf("Popped: %d\n", stack_pop(stack));
+    }
 
-    simple_node_print(node1);
-    simple_node_print(node2);
-    simple_node_print(node3);
-
-    printf("1: %d -> 2: %d -> 3: %d\n", node1->value, node1->next->value, node1->next->next->value);
-
-    delete_simple_node(node1);
-    delete_simple_node(node2);
-    delete_simple_node(node3);
-
-    node1 = NULL;
-    node2 = NULL;
-    node3 = NULL;
+    delete_stack(stack);
 
     return EXIT_SUCCESS;
 }
