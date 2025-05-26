@@ -1,1 +1,3 @@
+# Ignore dirs
 dist
+.vscode
